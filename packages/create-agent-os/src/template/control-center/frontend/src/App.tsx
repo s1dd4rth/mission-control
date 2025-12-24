@@ -291,6 +291,18 @@ function App() {
     }
   }, [runtimeConfig]);
 
+  // Auto-close Design OS when export completes
+  useEffect(() => {
+    if (state?.design?.exported && showDesignOS) {
+      // Only close if we were waiting for export
+      // We can infer this if we are on the export step? 
+      // Determining "waiting for export" is tricky, but generally if it becomes exported while open, it's a good time to close or notify.
+      // Let's notify first.
+      toast({ title: "Export Complete!", description: "Proceed to Implementation phase.", type: "success" });
+      setShowDesignOS(false);
+    }
+  }, [state?.design?.exported]);
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     toast({ title: "Prompt Copied!", type: "success" });
