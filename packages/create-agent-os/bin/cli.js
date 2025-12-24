@@ -60,13 +60,20 @@ async function init() {
             const appDir = path.join(root, 'app');
 
             // Use npm create vite to scaffold the app inside the 'app' folder
+            // Debugging CI/CD path issues
+            console.log(`[DEBUG] Root: ${root}`);
+            console.log(`[DEBUG] CWD before spawn: ${process.cwd()}`);
+            console.log(`[DEBUG] Spawning in: ${root}`);
+
             // Use npm create vite to scaffold the app inside the 'app' folder
             // Pin version to avoid experimental prompts
             const viteProcess = spawn('npx', ['-y', 'create-vite@5.2.0', 'app', '--template', 'react-ts'], {
                 stdio: 'inherit',
-                shell: true
-                // We rely on process.chdir(root) above. 
-                // Explicit cwd/env hacks failed in CI, so we keep the code clean.
+                shell: false, // Don't use shell, it messes up CWD in some environments
+                cwd: root, // Explicitly set CWD for the child process
+                // env: { ...process.env, PWD: root } // Maybe strictly needed? Let's check without first or keep it?
+                // Keeping env PWD just in case npx looks at it
+                env: { ...process.env, PWD: root }
             });
 
             viteProcess.on('close', async (code) => {

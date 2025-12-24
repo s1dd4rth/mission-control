@@ -33,3 +33,7 @@ jobs:
       # - name: Run Smoke Test
       #   run: node scripts/smoke-test.js
       #   working-directory: packages/create-agent-os
+
+      - name: Run Lifecycle Integration Test
+        run: node scripts/integration-test.js
+        working-directory: packages/create-agent-os

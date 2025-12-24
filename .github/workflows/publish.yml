@@ -32,6 +32,10 @@ jobs:
       #   run: node scripts/smoke-test.js
       #   working-directory: packages/create-agent-os
 
+      - name: Pre-Publish Lifecycle Test
+        run: node scripts/integration-test.js
+        working-directory: packages/create-agent-os
+
       - name: Publish (Dry Run)
         if: ${{ inputs.dry_run }}
         run: npm publish --dry-run
