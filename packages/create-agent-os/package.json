@@ -1,6 +1,6 @@
 {
     "name": "@builderos/create-agent-os",
-    "version": "0.0.30",
+    "version": "1.0.0",
     "description": "Scaffolding tool for Agent OS applications",
     "type": "module",
     "bin": {

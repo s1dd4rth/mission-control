@@ -551,12 +551,12 @@ function App() {
       <header className="px-8 py-6 flex justify-between items-end border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-10 shrink-0">
         <div className="flex flex-col gap-4">
           <h1 className="text-2xl font-semibold text-foreground tracking-tight flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center text-white">
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-5 h-5">
-                <path d="M30 50h40M70 50l-10-10M70 50l-10 10" stroke="white" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                <path d="M50 20 L75 80 L50 65 L25 80 Z" fill="currentColor" stroke="none" />
               </svg>
             </div>
-            Agent OS Control Center
+            Mission Control
           </h1>
           <p className="text-muted-foreground font-mono text-xs opacity-70">Project: {state?.projectRoot}</p>
         </div>
