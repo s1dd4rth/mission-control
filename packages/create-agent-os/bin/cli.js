@@ -63,8 +63,9 @@ async function init() {
             // Pin version to avoid experimental prompts
             const viteProcess = spawn('npx', ['-y', 'create-vite@5.2.0', 'app', '--template', 'react-ts'], {
                 stdio: 'inherit',
-                shell: true
-                // No cwd needed, we changed global cwd
+                shell: true,
+                cwd: root, // Explicitly set CWD for the child process
+                env: { ...process.env, PWD: root } // Force PWD env var to match to prevent shell confusion
             });
 
             viteProcess.on('close', async (code) => {
