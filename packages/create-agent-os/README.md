@@ -12,9 +12,7 @@ Agent OS provides a structured workspace for building AI Agents, including:
 To create a new project, run:
 
 ```bash
-npm create @builderos/agent-os@latest
-# or
-npx @builderos/create-agent-os@latest
+npx create-mission-control@latest
 ```
 
 Follow the prompts to name your project.
