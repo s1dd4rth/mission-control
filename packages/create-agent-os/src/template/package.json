@@ -1,0 +1,27 @@
+{
+    "name": "agent-os-app",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "workspaces": [
+        "app",
+        "control-center/frontend",
+        "control-center/backend",
+        "design-system",
+        "agent-os-ui"
+    ],
+    "scripts": {
+        "dev": "npm run build:ui && npm run start:all",
+        "build:ui": "cd agent-os-ui && npm run build",
+        "start:all": "concurrently \"npm run start:api\" \"npm run start:design\" \"npm run start:control\" \"npm run start:app\"",
+        "start:api": "cd control-center/backend && PORT=5403 npm start",
+        "start:design": "cd design-system && npm run dev -- --port 5400",
+        "start:control": "cd control-center/frontend && npm run dev -- --port 5401",
+        "start:app": "cd app && npm run dev -- --port 5402",
+        "build": "npm run build --workspaces",
+        "test": "npm run test --workspaces"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}

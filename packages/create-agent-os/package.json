@@ -1,0 +1,44 @@
+{
+    "name": "@builderos/create-agent-os",
+    "version": "0.0.30",
+    "description": "Scaffolding tool for Agent OS applications",
+    "type": "module",
+    "bin": {
+        "create-agent-os": "bin/cli.js"
+    },
+    "files": [
+        "bin",
+        "src"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint ."
+    },
+    "keywords": [
+        "agent-os",
+        "cli",
+        "scaffold",
+        "vite"
+    ],
+    "author": "Antigravity",
+    "license": "MIT",
+    "dependencies": {
+        "commander": "^11.1.0",
+        "fs-extra": "^11.2.0",
+        "kolorist": "^1.8.0",
+        "prompts": "^2.4.2"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.39.2",
+        "@types/node": "^20.10.0",
+        "@types/react": "^18.2.0",
+        "@types/react-dom": "^18.2.0",
+        "@vitejs/plugin-react": "^4.2.1",
+        "eslint": "^9.39.2",
+        "globals": "^16.5.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "typescript": "^5.3.3",
+        "vite": "^5.0.10"
+    }
+}

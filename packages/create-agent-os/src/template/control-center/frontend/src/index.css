@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/*
+  Control Center Theme (Aligned with Design OS)
+  Warm Neutrals / Stone Palette
+*/
+
+
+/* Light theme - Warm Stone */
+:root {
+    --radius: 0.5rem;
+    --background: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --card: oklch(1 0 0);
+    /* white */
+    --card-foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --popover: oklch(1 0 0);
+    /* white */
+    --popover-foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --primary: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --primary-foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --secondary: oklch(0.970 0.001 106.424);
+    /* stone-100 */
+    --secondary-foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --muted: oklch(0.970 0.001 106.424);
+    /* stone-100 */
+    --muted-foreground: oklch(0.370 0.010 67.558);
+    /* stone-600 -> stone-700 variant for contrast */
+    --accent: oklch(0.970 0.001 106.424);
+    /* stone-100 */
+    --accent-foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --destructive: oklch(0.586 0.253 17.585);
+    /* rose-600 */
+    --border: oklch(0.923 0.003 48.717);
+    /* stone-200 */
+    --input: oklch(0.923 0.003 48.717);
+    /* stone-200 */
+    --ring: oklch(0.553 0.013 58.071);
+    /* stone-500 */
+    --chart-1: oklch(0.532 0.157 131.589);
+    /* lime-600 */
+    /* Sidebar */
+    --sidebar: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --sidebar-foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --sidebar-primary: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --sidebar-primary-foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --sidebar-accent: oklch(0.970 0.001 106.424);
+    /* stone-100 */
+    --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --sidebar-border: oklch(0.923 0.003 48.717);
+    /* stone-200 */
+    --sidebar-ring: oklch(0.553 0.013 58.071);
+    /* stone-500 */
+}
+
+/* Dark theme (default for Control Center) - Warm Stone Dark */
+.dark {
+    --background: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --card: oklch(0.268 0.007 34.298);
+    /* stone-800 */
+    --card-foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --popover: oklch(0.268 0.007 34.298);
+    /* stone-800 */
+    --popover-foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --primary: oklch(0.923 0.003 48.717);
+    /* stone-200 */
+    --primary-foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --secondary: oklch(0.318 0.008 43.185);
+    /* stone-700 */
+    --secondary-foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --muted: oklch(0.318 0.008 43.185);
+    /* stone-700 */
+    --muted-foreground: oklch(0.709 0.01 56.259);
+    /* stone-400 */
+    --accent: oklch(0.318 0.008 43.185);
+    /* stone-700 */
+    --accent-foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --destructive: oklch(0.712 0.194 13.428);
+    /* rose-400 */
+    --border: oklch(0.370 0.010 67.558);
+    /* stone-600 */
+    --input: oklch(0.370 0.010 67.558);
+    /* stone-600 */
+    --ring: oklch(0.553 0.013 58.071);
+    /* stone-500 */
+    --chart-1: oklch(0.648 0.2 131.684);
+    /* lime-500 */
+    /* Sidebar */
+    --sidebar: oklch(0.268 0.007 34.298);
+    /* stone-800 */
+    --sidebar-foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --sidebar-primary: oklch(0.648 0.2 131.684);
+    /* lime-500 */
+    --sidebar-primary-foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --sidebar-accent: oklch(0.318 0.008 43.185);
+    /* stone-700 */
+    --sidebar-accent-foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --sidebar-border: oklch(0.370 0.010 67.558);
+    /* stone-600 */
+    --sidebar-ring: oklch(0.553 0.013 58.071);
+    /* stone-500 */
+}
+
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground font-sans antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-semibold tracking-tight;
+    }
+}

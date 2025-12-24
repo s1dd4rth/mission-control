@@ -1,0 +1,35 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [ main, master ]
+  push:
+    branches: [ main, master ]
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: packages/create-agent-os
+
+      - name: Run Lint
+        run: npm run lint
+        working-directory: packages/create-agent-os
+        continue-on-error: true # Don't block on lint for now, but report
+
+      - name: Security Audit
+        run: npm audit --audit-level=high
+        working-directory: packages/create-agent-os
+
+      - name: Run Smoke Test
+        run: node scripts/smoke-test.js
+        working-directory: packages/create-agent-os
