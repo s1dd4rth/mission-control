@@ -46,16 +46,25 @@ async function init() {
 
             // 1. Scaffold App (Client)
             console.log(cyan('1. Scaffolding Client App...'));
+
+            // Force change directory to the project root
+            // This is the most reliable way to ensure npx runs in the correct context
+            try {
+                process.chdir(root);
+                console.log(`Changed CWD to: ${process.cwd()}`);
+            } catch (err) {
+                console.error(red(`Failed to change directory to ${root}: ${err.message}`));
+                process.exit(1);
+            }
+
             const appDir = path.join(root, 'app');
+
             // Use npm create vite to scaffold the app inside the 'app' folder
-            // Pin version to avoid experimental prompts (e.g. rolldown) and use npx -y to avoid install prompt
-            // Pass relative path 'app' but force CWD change via shell command
-            // This avoids CI issues where spawn cwd option might be ignored or misbehaved
-            // and avoids create-vite prompting for package name when given an absolute path
-            const viteProcess = spawn(`cd "${root}" && npx -y create-vite@5.2.0 app --template react-ts`, {
+            // Pin version to avoid experimental prompts
+            const viteProcess = spawn('npx', ['-y', 'create-vite@5.2.0', 'app', '--template', 'react-ts'], {
                 stdio: 'inherit',
-                shell: true,
-                // cwd: root // Removed redundancy, handled by cd
+                shell: true
+                // No cwd needed, we changed global cwd
             });
 
             viteProcess.on('close', async (code) => {
