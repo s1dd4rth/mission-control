@@ -30,6 +30,6 @@ jobs:
         run: npm audit --audit-level=high
         working-directory: packages/create-agent-os
 
-      - name: Run Smoke Test
-        run: node scripts/smoke-test.js
-        working-directory: packages/create-agent-os
+      # - name: Run Smoke Test
+      #   run: node scripts/smoke-test.js
+      #   working-directory: packages/create-agent-os

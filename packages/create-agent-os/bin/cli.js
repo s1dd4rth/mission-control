@@ -60,12 +60,13 @@ async function init() {
             const appDir = path.join(root, 'app');
 
             // Use npm create vite to scaffold the app inside the 'app' folder
+            // Use npm create vite to scaffold the app inside the 'app' folder
             // Pin version to avoid experimental prompts
             const viteProcess = spawn('npx', ['-y', 'create-vite@5.2.0', 'app', '--template', 'react-ts'], {
                 stdio: 'inherit',
-                shell: true,
-                cwd: root, // Explicitly set CWD for the child process
-                env: { ...process.env, PWD: root } // Force PWD env var to match to prevent shell confusion
+                shell: true
+                // We rely on process.chdir(root) above. 
+                // Explicit cwd/env hacks failed in CI, so we keep the code clean.
             });
 
             viteProcess.on('close', async (code) => {
