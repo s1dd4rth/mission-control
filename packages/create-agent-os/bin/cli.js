@@ -49,10 +49,13 @@ async function init() {
             const appDir = path.join(root, 'app');
             // Use npm create vite to scaffold the app inside the 'app' folder
             // Pin version to avoid experimental prompts (e.g. rolldown) and use npx -y to avoid install prompt
-            const viteProcess = spawn('npx', ['-y', 'create-vite@5.2.0', 'app', '--template', 'react-ts'], {
+            // Pass relative path 'app' but force CWD change via shell command
+            // This avoids CI issues where spawn cwd option might be ignored or misbehaved
+            // and avoids create-vite prompting for package name when given an absolute path
+            const viteProcess = spawn(`cd "${root}" && npx -y create-vite@5.2.0 app --template react-ts`, {
                 stdio: 'inherit',
                 shell: true,
-                cwd: root // Run inside the project root so it creates 'app' there
+                // cwd: root // Removed redundancy, handled by cd
             });
 
             viteProcess.on('close', async (code) => {
