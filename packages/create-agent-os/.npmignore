@@ -4,3 +4,6 @@ node_modules
 .gitignore
 test-cli-app*
 *.log
+scripts
+tsconfig.json
+eslint.config.js

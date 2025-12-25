@@ -4,7 +4,7 @@ export default {
     content: [
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
-        "./node_modules/@builderos/agent-os-ui/dist/**/*.{js,ts,jsx,tsx}" // Support for installed UI lib if built
+        "./node_modules/@theproductguy/agent-os-ui/dist/**/*.{js,ts,jsx,tsx}" // Support for installed UI lib if built
     ],
     theme: {
         extend: {

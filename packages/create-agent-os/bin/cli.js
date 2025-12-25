@@ -112,7 +112,7 @@ async function init() {
 
                 appPkg.dependencies = {
                     ...appPkg.dependencies,
-                    "@builderos/agent-os-ui": "*", // Use workspace version
+                    "@theproductguy/agent-os-ui": "*", // Use workspace version
                     "lucide-react": "^0.469.0",
                     "clsx": "^2.1.0",
                     "tailwind-merge": "^2.2.0",

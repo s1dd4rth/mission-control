@@ -1,4 +1,4 @@
-# @builderos/agent-os-ui
+# @theproductguy/agent-os-ui
 
 The official UI capability for the **Agent OS** workflow.
 Use this library to build the control interface that guides you through the Antigravity development process (Product -> Design -> Build -> Verify).
@@ -6,19 +6,19 @@ Use this library to build the control interface that guides you through the Anti
 ## Installation
 
 ```bash
-npm install @builderos/agent-os-ui
+npm install @theproductguy/agent-os-ui
 ```
 
 ## Setup
 
 1. Import the styles:
 ```ts
-import '@builderos/agent-os-ui/style.css';
+import '@theproductguy/agent-os-ui/style.css';
 ```
 
 2. Build your Control Dashboard:
 ```tsx
-import { AgentShell, GuidanceCard } from '@builderos/agent-os-ui';
+import { AgentShell, GuidanceCard } from '@theproductguy/agent-os-ui';
 
 export function ControlCenter() {
   return (
@@ -48,7 +48,7 @@ export function ControlCenter() {
 ## Example Layout
 
 ```tsx
-import { AgentShell, AgentSidebar, ThemeToggle } from '@builderos/agent-os-ui';
+import { AgentShell, AgentSidebar, ThemeToggle } from '@theproductguy/agent-os-ui';
 import { Home, Layers } from 'lucide-react';
 
 export default function App() {

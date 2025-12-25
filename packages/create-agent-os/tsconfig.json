@@ -22,7 +22,7 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
         "paths": {
-            "@builderos/agent-os-ui": [
+            "@theproductguy/agent-os-ui": [
                 "../agent-os-ui/src/index.ts"
             ]
         }

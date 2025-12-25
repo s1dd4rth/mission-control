@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Layout, Monitor, Layers, FileText, Code, CheckSquare, RefreshCw, ArrowRight, X, Plus, Trash2, WalletCards, LayoutDashboard, Copy, Package } from 'lucide-react';
+import { Layout, Layers, FileText, Code, CheckSquare, RefreshCw, ArrowRight, X, Plus, Trash2, WalletCards, LayoutDashboard, Copy, Package } from 'lucide-react';
 import { useToast } from './components/ui/ToastContext';
-import { ThemeToggle } from '@builderos/agent-os-ui';
-import '@builderos/agent-os-ui/style.css';
+import { ThemeToggle } from '@theproductguy/agent-os-ui';
+import '@theproductguy/agent-os-ui/style.css';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
@@ -265,7 +265,7 @@ function App() {
     fetch('/runtime-config.json')
       .then(res => res.json())
       .then(config => { setRuntimeConfig(config); })
-      .catch(err => {
+      .catch(() => {
         setRuntimeConfig({
           api: 'http://localhost:5403',
           app: 'http://localhost:5402',
