@@ -416,7 +416,7 @@ function App() {
                   <textarea
                     value={editContent}
                     onChange={(e) => setEditContent(e.target.value)}
-                    className="w-full h-full min-h-[500px] p-4 font-mono text-sm bg-secondary/10 border border-border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full h-full min-h-[500px] p-4 font-mono text-sm bg-secondary text-secondary-foreground border border-border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary/20"
                   />
                 ) : (
                   <article className="prose dark:prose-invert max-w-none prose-headings:font-serif prose-headings:font-semibold prose-a:text-primary prose-code:text-primary prose-pre:bg-secondary/50 prose-pre:border prose-pre:border-border prose-p:leading-relaxed prose-p:mb-4">
@@ -443,7 +443,7 @@ function App() {
                     <input
                       autoFocus
                       type="text"
-                      className="w-full px-3 py-2 rounded-md border border-input bg-background text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="w-full px-3 py-2 rounded-md border border-input bg-secondary text-secondary-foreground text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       placeholder="e.g. user-profile"
                       value={newSpecName}
                       onChange={(e) => setNewSpecName(e.target.value)}

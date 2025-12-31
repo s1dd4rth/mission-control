@@ -1,6 +1,6 @@
 {
     "name": "@theproductguy/create-mission-control",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Scaffolding tool for Agent OS applications",
     "type": "module",
     "bin": {
