@@ -148,8 +148,15 @@ export function ExportPage() {
                     command="/export-product"
                     prompt="Antigravity, generate the export package and sync it. Read 'agent-os/commands/export-product/export-product.md'."
                   />
-                  <p className="text-sm text-stone-500 dark:text-stone-400 italic">
-                    Note: Once the command finishes, return to <strong>Mission Control</strong> to proceed with implementation.
+                  <p className="text-sm text-stone-500 dark:text-stone-400 italic flex items-center gap-2">
+                    Note: Once the command finishes,
+                    <button
+                      onClick={() => window.location.reload()}
+                      className="text-stone-900 dark:text-stone-100 font-medium underline hover:text-primary transition-colors cursor-pointer"
+                    >
+                      refresh this page
+                    </button>
+                    to download your package.
                   </p>
                 </div>
               )}

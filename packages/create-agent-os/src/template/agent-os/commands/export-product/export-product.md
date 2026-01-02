@@ -167,7 +167,8 @@ Use Test-Driven Development (TDD) based on `@product-plan/sections/SECTION_ID/te
 ## Step 9: Zip and Handoff
 
 1. Zip `product-plan/` into `product-plan.zip`.
-2. Sync key files to `app/agent-os/product/` (Overview, Roadmap, Data Model, Design System) to update the status in the main app dashboard.
+2. Copy `product-plan.zip` to `design-system/product-plan.zip` (so Design OS can detect it).
+3. Sync key files to `app/agent-os/product/` (Overview, Roadmap, Data Model, Design System) to update the status in the main app dashboard.
 
 ## Final Output
 
