@@ -691,14 +691,20 @@ function App() {
               </div>
 
               <div className="mt-6">
-                <PromptButton
-                  label="Scaffold App"
-                  prompt="Antigravity, scaffold the implementation. Read 'agent-os/commands/scaffold-implementation/scaffold-implementation.md'."
-                  onClick={copyToClipboard}
-                />
+                {!state?.implementation?.scaffolded ? (
+                  <PromptButton
+                    label="Scaffold App"
+                    prompt="Antigravity, scaffold the implementation. Read 'agent-os/commands/scaffold-implementation/scaffold-implementation.md'."
+                    onClick={copyToClipboard}
+                  />
+                ) : (
+                  <div className="p-3 bg-secondary/30 rounded-lg border border-border/50 text-sm text-muted-foreground text-center italic mb-4">
+                    App scaffolded. Ready for implementation.
+                  </div>
+                )}
 
                 {state?.implementation?.scaffolded && state?.design?.exportPrompts?.oneShot && (
-                  <div className="mt-3 pt-3 border-t border-border/50">
+                  <div className="pt-3 border-t border-border/50">
                     <p className="text-xs text-muted-foreground mb-2 font-medium">Implementation Options:</p>
                     <div className="space-y-2">
                       <PromptButton
@@ -709,12 +715,17 @@ function App() {
                         primary
                       />
                       {state?.design?.exportPrompts?.section && (
-                        <PromptButton
-                          label="Option B: Incremental (Section)"
-                          prompt={`Antigravity, implement a section. Read 'product-plan/prompts/section-prompt.md'.`}
-                          onClick={copyToClipboard}
-                          small
-                        />
+                        <div className="relative">
+                          <PromptButton
+                            label="Option B: Incremental (Section)"
+                            prompt={`Antigravity, implement a section. Read 'product-plan/prompts/section-prompt.md'.`}
+                            onClick={copyToClipboard}
+                            small
+                          />
+                          <p className="text-[10px] text-muted-foreground mt-1.5 text-center leading-tight">
+                            Build feature-by-feature using the <strong>Feature Specs</strong> list ->
+                          </p>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -777,36 +788,51 @@ function App() {
                 ))}
 
                 {/* Pending Roadmap Items */}
+                {/* Pending Roadmap Items */}
                 {state?.product?.roadmap?.items?.filter(item =>
                   !item.completed &&
                   !state?.product?.roadmap?.isBoilerplate &&
-                  !state?.specs?.some(s => s.name.toLowerCase() === item.name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''))
+                  !state?.specs?.some(s => s.name.toLowerCase().includes(item.name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')))
                 ).map(item => (
                   <div key={item.name} className="border border-dashed border-border/60 p-4 rounded-lg bg-secondary/5 hover:bg-secondary/10 transition-colors">
-                    <h3 className="font-medium text-base mb-2 flex items-center gap-2 text-muted-foreground">
-                      <div className="w-2 h-2 rounded-full bg-stone-300" />
-                      {item.name}
-                    </h3>
-                    <p className="text-xs text-muted-foreground mb-4 pl-4">Pending in Roadmap</p>
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="font-medium text-base flex items-center gap-2 text-muted-foreground w-full">
+                        <div className="w-2 h-2 rounded-full bg-stone-300 shrink-0" />
+                        <span className="truncate" title={item.name}>{item.name}</span>
+                      </h3>
+                      <span className="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground bg-secondary px-1.5 py-0.5 rounded shrink-0 ml-2">Planned</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mb-4 pl-4 opacity-70">
+                      Defined in Product Roadmap. Ready to spec.
+                    </p>
                     <div className="pl-4">
                       <button
                         onClick={() => {
-                          setNewSpecName(item.name.toLowerCase().replace(/\s+/g, '-'));
+                          setNewSpecName(item.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''));
                           setCreatingSpec(true);
                         }}
-                        className="text-xs bg-background hover:bg-secondary border border-border px-3 py-1.5 rounded-md flex items-center gap-1.5 font-medium transition cursor-pointer"
+                        className="text-xs bg-background hover:bg-secondary border border-border px-3 py-1.5 rounded-md flex items-center gap-1.5 font-medium transition cursor-pointer w-full justify-center group"
                       >
-                        <Plus size={12} /> Shape Spec
+                        <Plus size={12} className="group-hover:text-primary transition-colors" /> Shape Spec
                       </button>
                     </div>
                   </div>
                 ))}
 
-                {state?.specs?.length === 0 && (!state?.product?.roadmap?.items || state?.product?.roadmap?.items?.length === 0) && (
-                  <div className="text-muted-foreground italic p-8 text-center text-sm border border-dashed border-border rounded-lg bg-secondary/10">
-                    No specs found yet.<br />Create one to start coding.
+                {/* Empty State */}
+                {(!state?.specs?.length && (!state?.product?.roadmap?.items?.length || state?.product?.roadmap?.isBoilerplate)) && (
+                  <div className="border border-dashed border-border/60 p-8 rounded-lg text-center h-40 flex flex-col items-center justify-center">
+                    <p className="text-muted-foreground text-sm mb-3">No specs found yet.</p>
+                    <button
+                      onClick={() => setCreatingSpec(true)}
+                      className="text-sm px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                    >
+                      Create your first spec
+                    </button>
                   </div>
                 )}
+
+
               </div>
             </section>
           </main>
