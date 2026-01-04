@@ -90,7 +90,7 @@ async function init() {
                 fs.cpSync(path.join(templateDir, 'control-center'), path.join(root, 'control-center'), { recursive: true });
 
                 // Copy Design System
-                fs.cpSync(path.join(templateDir, 'design'), path.join(root, 'design-system'), { recursive: true });
+                fs.cpSync(path.join(templateDir, 'design-system'), path.join(root, 'design-system'), { recursive: true });
 
                 // Copy Agent OS Docs
                 fs.cpSync(path.join(templateDir, 'agent-os'), path.join(root, 'agent-os'), { recursive: true });

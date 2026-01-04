@@ -723,7 +723,7 @@ function App() {
                             small
                           />
                           <p className="text-[10px] text-muted-foreground mt-1.5 text-center leading-tight">
-                            Build feature-by-feature using the <strong>Feature Specs</strong> list ->
+                            Build feature-by-feature using the <strong>Feature Specs</strong> list &rarr;
                           </p>
                         </div>
                       )}

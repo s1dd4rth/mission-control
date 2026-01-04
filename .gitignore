@@ -7,3 +7,5 @@ coverage
 .idea
 .vscode
 *.log
+local-test-app/
+e2e_test_temp/
