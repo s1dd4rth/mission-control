@@ -87,16 +87,23 @@ async function init() {
                 const templateDir = path.resolve(__dirname, '../src/template');
 
                 // Copy Control Center
-                fs.cpSync(path.join(templateDir, 'control-center'), path.join(root, 'control-center'), { recursive: true });
+                // Copy helper to exclude node_modules
+                const copyOptions = {
+                    recursive: true,
+                    filter: (src) => !src.includes('node_modules')
+                };
+
+                // Copy Control Center
+                fs.cpSync(path.join(templateDir, 'control-center'), path.join(root, 'control-center'), copyOptions);
 
                 // Copy Design System
-                fs.cpSync(path.join(templateDir, 'design-system'), path.join(root, 'design-system'), { recursive: true });
+                fs.cpSync(path.join(templateDir, 'design-system'), path.join(root, 'design-system'), copyOptions);
 
                 // Copy Agent OS Docs
-                fs.cpSync(path.join(templateDir, 'agent-os'), path.join(root, 'agent-os'), { recursive: true });
+                fs.cpSync(path.join(templateDir, 'agent-os'), path.join(root, 'agent-os'), copyOptions);
 
                 // Copy Agent OS UI Package (for local workspace support)
-                fs.cpSync(path.join(templateDir, 'agent-os-ui'), path.join(root, 'agent-os-ui'), { recursive: true });
+                fs.cpSync(path.join(templateDir, 'agent-os-ui'), path.join(root, 'agent-os-ui'), copyOptions);
 
                 // 3. Configure Workspace
                 console.log(cyan('\n3. Configuring Workspace...'));

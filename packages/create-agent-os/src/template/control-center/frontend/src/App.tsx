@@ -39,6 +39,10 @@ interface ProjectState {
       oneShot: boolean;
       section: boolean;
     };
+    qa?: {
+      audit: boolean;
+      polish: boolean;
+    };
   };
   implementation: {
     scaffolded: boolean;
@@ -646,6 +650,17 @@ function App() {
                   </div>
                 </div>
 
+                <div className="grid grid-cols-2 gap-2">
+                  <div className={`p-2 rounded-lg border text-center ${state?.design?.qa?.audit ? 'bg-emerald-50/50 border-emerald-200 text-emerald-700 dark:bg-emerald-900/20 dark:border-emerald-800 dark:text-emerald-300' : 'bg-secondary/20 border-border/50 text-muted-foreground'}`}>
+                    <span className="text-xs font-medium block mb-1">Audit</span>
+                    {state?.design?.qa?.audit ? <CheckSquare size={14} className="mx-auto" /> : <span className="block w-2 h-2 rounded-full bg-stone-300 mx-auto mt-1" />}
+                  </div>
+                  <div className={`p-2 rounded-lg border text-center ${state?.design?.qa?.polish ? 'bg-emerald-50/50 border-emerald-200 text-emerald-700 dark:bg-emerald-900/20 dark:border-emerald-800 dark:text-emerald-300' : 'bg-secondary/20 border-border/50 text-muted-foreground'}`}>
+                    <span className="text-xs font-medium block mb-1">Polish</span>
+                    {state?.design?.qa?.polish ? <CheckSquare size={14} className="mx-auto" /> : <span className="block w-2 h-2 rounded-full bg-stone-300 mx-auto mt-1" />}
+                  </div>
+                </div>
+
                 <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg border border-border/50">
                   <span className="text-foreground font-medium text-sm flex items-center gap-2"><ArrowRight size={16} className="text-muted-foreground" /> Export</span>
                   {state?.design?.exported ? (
@@ -658,7 +673,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="mt-6 flex gap-2">
+              <div className="mt-6 flex flex-col gap-2">
                 {!state?.design?.initialized && (
                   <PromptButton
                     label="Sync Data"
@@ -666,6 +681,22 @@ function App() {
                     onClick={copyToClipboard}
                     primary
                   />
+                )}
+                {state?.design?.initialized && !state?.design?.exported && (
+                  <div className="flex gap-2">
+                    <PromptButton
+                      label="Run Audit"
+                      prompt="Antigravity, run an audit on the design system. Read 'design-system/.gemini/commands/impeccable/audit.md'."
+                      onClick={copyToClipboard}
+                      small
+                    />
+                    <PromptButton
+                      label="Run Polish"
+                      prompt="Antigravity, run a polish pass. Read 'design-system/.gemini/commands/impeccable/polish.md'."
+                      onClick={copyToClipboard}
+                      small
+                    />
+                  </div>
                 )}
               </div>
             </section>
@@ -835,6 +866,8 @@ function App() {
 
               </div>
             </section>
+
+
           </main>
         </div>
       </div>

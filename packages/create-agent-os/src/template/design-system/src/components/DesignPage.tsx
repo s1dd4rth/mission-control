@@ -239,6 +239,81 @@ export function DesignPage() {
           )}
         </StepIndicator>
 
+        {/* Impeccable QA Commands - Always visible */}
+        <Card className="border-stone-200 dark:border-stone-700 shadow-sm mt-8">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg font-semibold text-stone-900 dark:text-stone-100 flex items-center gap-2">
+              <span className="text-xl">✨</span> Impeccable Commands
+            </CardTitle>
+            <p className="text-sm text-stone-500 dark:text-stone-400">
+              Quality commands that transform your designs. Auto-audit runs after each design step.
+            </p>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {/* Diagnose */}
+            <div>
+              <h4 className="text-xs font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-2">
+                🔍 Diagnose
+              </h4>
+              <div className="grid grid-cols-2 gap-2">
+                <CommandCard
+                  name="/audit"
+                  description="Comprehensive quality audit"
+                  leads={["/normalize", "/harden", "/optimize"]}
+                />
+                <CommandCard
+                  name="/critique"
+                  description="UX evaluation"
+                  leads={["/polish", "/simplify", "/bolder"]}
+                />
+              </div>
+            </div>
+
+            {/* Quality */}
+            <div>
+              <h4 className="text-xs font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-2">
+                ✅ Quality
+              </h4>
+              <div className="grid grid-cols-4 gap-2">
+                <CommandCard name="/normalize" description="Design system consistency" />
+                <CommandCard name="/harden" description="Resilience & edge cases" />
+                <CommandCard name="/optimize" description="Performance" />
+                <CommandCard name="/polish" description="Final details" />
+              </div>
+            </div>
+
+            {/* Intensity */}
+            <div>
+              <h4 className="text-xs font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-2">
+                🎚️ Intensity
+              </h4>
+              <div className="grid grid-cols-2 gap-2">
+                <CommandCard name="/bolder" description="Amplify safe designs" />
+                <CommandCard name="/quieter" description="Tone down aggressive designs" />
+              </div>
+            </div>
+
+            {/* Enhancement */}
+            <div>
+              <h4 className="text-xs font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-2">
+                ✨ Enhancement
+              </h4>
+              <div className="grid grid-cols-3 gap-2">
+                <CommandCard name="/animate" description="Add motion" />
+                <CommandCard name="/colorize" description="Add strategic color" />
+                <CommandCard name="/delight" description="Add moments of joy" />
+              </div>
+            </div>
+
+            {/* Workflow hint */}
+            <div className="bg-stone-100 dark:bg-stone-800 rounded-md px-4 py-2.5">
+              <p className="text-xs text-stone-500 dark:text-stone-400">
+                See <code className="font-mono text-stone-700 dark:text-stone-300">.gemini/commands/impeccable/WORKFLOW.md</code> for command relationships
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Next Phase Button - shown when all steps complete */}
         {allStepsComplete && (
           <StepIndicator step={3} status="current" isLast>
@@ -280,5 +355,34 @@ function ColorSwatch({ label, colorName }: ColorSwatchProps) {
       <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{label}</p>
       <p className="text-xs text-stone-500 dark:text-stone-400">{colorName}</p>
     </div>
+  )
+}
+
+interface CommandCardProps {
+  name: string
+  description: string
+  leads?: string[]
+}
+
+function CommandCard({ name, description, leads }: CommandCardProps) {
+  const copyCommand = () => {
+    navigator.clipboard.writeText(`Antigravity, run ${name}. Read '.gemini/commands/impeccable/${name.slice(1)}.md'.`)
+  }
+
+  return (
+    <button
+      onClick={copyCommand}
+      className="text-left p-3 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 hover:border-stone-400 dark:hover:border-stone-500 transition-all group"
+    >
+      <code className="text-sm font-mono font-semibold text-stone-900 dark:text-stone-100 group-hover:text-violet-600 dark:group-hover:text-violet-400">
+        {name}
+      </code>
+      <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">{description}</p>
+      {leads && leads.length > 0 && (
+        <p className="text-[10px] text-stone-400 dark:text-stone-500 mt-1">
+          → {leads.join(', ')}
+        </p>
+      )}
+    </button>
   )
 }

@@ -125,9 +125,11 @@ app.get('/api/status', async (req, res) => {
 
         // Check for Design OS export and steps
         const designDir = path.join(PROJECT_ROOT, 'design-system');
-        // Note: In dev, these files are in design/public/product. In prod, injected elsewhere.
-        // But for this local dev setup, we check where the initialize-design command puts them?
-        // Actually, initialize-design puts them in `design/public/product`.
+
+        // QA Check
+        const qaDir = path.join(designDir, 'QA');
+        const auditReport = path.join(qaDir, 'audit-report.md');
+        const polishReport = path.join(qaDir, 'polish-report.md');
 
         const hasDesignExport = fs.existsSync(path.join(PROJECT_ROOT, 'product-plan'));
         const hasDesignInit = fs.existsSync(path.join(designDir, 'product/product-overview.md'));
@@ -146,6 +148,10 @@ app.get('/api/status', async (req, res) => {
                 exportPrompts: {
                     oneShot: fs.existsSync(path.join(PROJECT_ROOT, 'product-plan/prompts/one-shot-prompt.md')),
                     section: fs.existsSync(path.join(PROJECT_ROOT, 'product-plan/prompts/section-prompt.md'))
+                },
+                qa: {
+                    audit: fs.existsSync(auditReport),
+                    polish: fs.existsSync(polishReport)
                 }
             },
             implementation: {

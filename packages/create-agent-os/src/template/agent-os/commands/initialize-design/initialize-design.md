@@ -64,4 +64,13 @@ Create a draft data model file:
 ### Step 3: Verification
 - Check that `design-system/product/product-overview.md` exists.
 - Check that `design-system/product/product-roadmap.md` exists.
-- Output a confirmation message: "Design OS initialized! You can now open http://localhost:3000 to begin designing."
+- Output a confirmation message:
+
+"Design OS initialized! You can now open http://localhost:5400 to begin designing.
+
+**Recommended Next Steps:**
+1. Run `/teach-impeccable` — One-time setup to establish design context for this project.
+2. Run `/design-tokens` — Define your colors and typography.
+3. Run `/design-shell` — Design your navigation and layout.
+
+The Impeccable command system will guide you toward distinctive, AI-slop-free designs."

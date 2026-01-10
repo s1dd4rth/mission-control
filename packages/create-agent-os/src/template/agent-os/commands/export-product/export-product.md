@@ -19,6 +19,30 @@ Verify the minimum requirements exist:
 
 If required files are missing, stop and ask the user to complete them first.
 
+## Step 1.5: Impeccable Quality Check (Pre-Export)
+
+Before exporting, run a quick quality assessment:
+
+**Check for QA Reports:**
+1. Look for `design-system/QA/audit-report.md` — Has a full audit been run?
+2. Look for `design-system/QA/tokens-audit.md` — Were design tokens audited?
+3. Look for `design-system/QA/shell-audit.md` — Was the shell audited?
+
+**If no audit reports exist:**
+"⚠️ **Impeccable Warning**: No quality audits found. I recommend running `/audit` before exporting to ensure your design meets quality standards and avoids 'AI Slop'.
+
+Would you like me to:
+1. Run `/audit` now (recommended)
+2. Proceed with export anyway"
+
+**If audits exist but have failures:**
+"⚠️ **Impeccable Warning**: Previous audit found issues that may not have been addressed. Consider running the suggested fix commands (`/normalize`, `/harden`, etc.) before exporting.
+
+Proceed with export?"
+
+**If audits pass or user confirms:**
+Continue to Step 2.
+
 ## Step 2: Create Export Directory Structure
 
 Create the `product-plan/` directory in the project root with this structure:
