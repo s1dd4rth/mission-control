@@ -46,6 +46,21 @@ interface ProjectState {
   };
   implementation: {
     scaffolded: boolean;
+    tests?: {
+      count: number;
+      hasTests: boolean;
+    };
+    coverage?: number | null;
+    specs?: {
+      total: number;
+      completed: number;
+    };
+    git?: {
+      initialized: boolean;
+      branch: string | null;
+      uncommitted: number;
+      lastCommit: string | null;
+    };
   };
   specs: Spec[];
   services?: {
@@ -701,77 +716,14 @@ function App() {
               </div>
             </section>
 
-            {/* Phase 3: Implementation */}
-            <section className="bg-card border border-border rounded-xl p-5 shadow-sm h-full flex flex-col transition-all hover:shadow-md hover:border-border/80">
-              <div className="flex items-center gap-3 mb-5 pb-4 border-b border-border/50">
-                <div className="p-2 bg-sidebar-primary/10 text-sidebar-primary rounded-lg">
-                  <Package size={20} />
-                </div>
-                <h2 className="text-lg font-semibold">3. Implementation</h2>
-              </div>
-
-              <div className="space-y-4 flex-1">
-                <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg border border-border/50">
-                  <span className="text-foreground font-medium text-sm flex items-center gap-2"><Layout size={16} className="text-muted-foreground" /> Scaffold</span>
-                  {state?.implementation?.scaffolded ? (
-                    <span className="text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded text-xs font-medium border border-emerald-200 dark:border-emerald-800">Done</span>
-                  ) : (
-                    <span className="text-muted-foreground bg-secondary px-2 py-0.5 rounded text-xs font-medium border border-border">Pending</span>
-                  )}
-                </div>
-              </div>
-
-              <div className="mt-6">
-                {!state?.implementation?.scaffolded ? (
-                  <PromptButton
-                    label="Scaffold App"
-                    prompt="Antigravity, scaffold the implementation. Read 'agent-os/commands/scaffold-implementation/scaffold-implementation.md'."
-                    onClick={copyToClipboard}
-                  />
-                ) : (
-                  <div className="p-3 bg-secondary/30 rounded-lg border border-border/50 text-sm text-muted-foreground text-center italic mb-4">
-                    App scaffolded. Ready for implementation.
-                  </div>
-                )}
-
-                {state?.implementation?.scaffolded && state?.design?.exportPrompts?.oneShot && (
-                  <div className="pt-3 border-t border-border/50">
-                    <p className="text-xs text-muted-foreground mb-2 font-medium">Implementation Options:</p>
-                    <div className="space-y-2">
-                      <PromptButton
-                        label="Option A: One-Shot (All)"
-                        prompt={`Antigravity, implement the app. Read 'product-plan/prompts/one-shot-prompt.md'.`}
-                        onClick={copyToClipboard}
-                        small
-                        primary
-                      />
-                      {state?.design?.exportPrompts?.section && (
-                        <div className="relative">
-                          <PromptButton
-                            label="Option B: Incremental (Section)"
-                            prompt={`Antigravity, implement a section. Read 'product-plan/prompts/section-prompt.md'.`}
-                            onClick={copyToClipboard}
-                            small
-                          />
-                          <p className="text-[10px] text-muted-foreground mt-1.5 text-center leading-tight">
-                            Build feature-by-feature using the <strong>Feature Specs</strong> list &rarr;
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </section>
-
-            {/* Phase 4: Specs & Implementation */}
+            {/* Phase 3: Feature Specs */}
             <section className="bg-card border border-border rounded-xl p-5 shadow-sm col-span-1 md:col-span-2 lg:col-span-1 h-full flex flex-col transition-all hover:shadow-md hover:border-border/80">
               <div className="flex items-center justify-between mb-5 pb-4 border-b border-border/50">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-sidebar-primary/10 text-sidebar-primary rounded-lg">
                     <Code size={20} />
                   </div>
-                  <h2 className="text-lg font-semibold">4. Feature Specs</h2>
+                  <h2 className="text-lg font-semibold">3. Feature Specs</h2>
                 </div>
                 <button className="text-xs bg-secondary hover:bg-secondary/80 border border-border px-3 py-2 rounded-md flex items-center gap-1.5 font-medium transition cursor-pointer"
                   onClick={() => setCreatingSpec(true)}>
@@ -780,6 +732,24 @@ function App() {
               </div>
 
               <div className="space-y-3 flex-1 overflow-y-auto max-h-[300px] pr-1">
+                {/* Auto-generate from Roadmap after Design Export */}
+                {(state?.product?.roadmap?.items?.filter(item =>
+                  !item.completed &&
+                  !state?.product?.roadmap?.isBoilerplate
+                ) ?? []).length > 0 && !state?.specs?.length && (
+                    <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-lg mb-3">
+                      <p className="text-sm text-blue-700 dark:text-blue-300 mb-2">
+                        Ready to generate specs from roadmap items?
+                      </p>
+                      <PromptButton
+                        label="Generate All Specs"
+                        prompt={`Antigravity, generate feature specs from the roadmap items. For each item in 'agent-os/product/roadmap.md' that is not yet completed, create a spec folder in 'agent-os/specs/[feature-name]/' with spec.md and tasks.md files. Context: 1. Read 'product-plan/product-overview.md' for data model/flows. 2. Read 'design-system/design-tokens.md' and 'design-system/app-shell.md' for UI/UX constraints. 3. Use the shape-spec command: Read 'agent-os/commands/shape-spec/shape-spec.md'.`}
+                        onClick={copyToClipboard}
+                        small
+                        primary
+                      />
+                    </div>
+                  )}
                 {state?.specs?.map(spec => (
                   <div key={spec.name} className="bg-secondary/20 p-4 rounded-lg border border-border/50 hover:border-border transition-colors group relative">
                     <button
@@ -867,6 +837,132 @@ function App() {
               </div>
             </section>
 
+            {/* Phase 4: Implementation */}
+            <section className="bg-card border border-border rounded-xl p-5 shadow-sm h-full flex flex-col transition-all hover:shadow-md hover:border-border/80">
+              <div className="flex items-center gap-3 mb-5 pb-4 border-b border-border/50">
+                <div className="p-2 bg-sidebar-primary/10 text-sidebar-primary rounded-lg">
+                  <Package size={20} />
+                </div>
+                <h2 className="text-lg font-semibold">4. Implementation</h2>
+              </div>
+
+              <div className="space-y-3 flex-1">
+                {/* Scaffold Status */}
+                <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg border border-border/50">
+                  <span className="text-foreground font-medium text-sm flex items-center gap-2"><Layout size={16} className="text-muted-foreground" /> Scaffold</span>
+                  {state?.implementation?.scaffolded ? (
+                    <span className="text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded text-xs font-medium border border-emerald-200 dark:border-emerald-800">Done</span>
+                  ) : (
+                    <span className="text-muted-foreground bg-secondary px-2 py-0.5 rounded text-xs font-medium border border-border">Pending</span>
+                  )}
+                </div>
+
+                {/* Git Status */}
+                {state?.implementation?.git?.initialized && (
+                  <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg border border-border/50">
+                    <span className="text-foreground font-medium text-sm flex items-center gap-2">
+                      <svg className="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
+                      {state.implementation.git.branch || 'main'}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {state.implementation.git.uncommitted > 0 && (
+                        <span className="text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-2 py-0.5 rounded text-xs font-medium border border-amber-200 dark:border-amber-800">
+                          {state.implementation.git.uncommitted} uncommitted
+                        </span>
+                      )}
+                      {state.implementation.git.uncommitted === 0 && (
+                        <span className="text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded text-xs font-medium border border-emerald-200 dark:border-emerald-800">Clean</span>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Tests & Coverage */}
+                {state?.implementation?.scaffolded && (
+                  <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg border border-border/50">
+                    <span className="text-foreground font-medium text-sm flex items-center gap-2">
+                      <CheckSquare size={16} className="text-muted-foreground" /> Tests
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {state?.implementation?.tests?.hasTests ? (
+                        <span className="text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded text-xs font-medium border border-emerald-200 dark:border-emerald-800">
+                          {state.implementation.tests.count} files
+                        </span>
+                      ) : (
+                        <span className="text-muted-foreground bg-secondary px-2 py-0.5 rounded text-xs font-medium border border-border">No tests</span>
+                      )}
+                      {state?.implementation?.coverage !== null && state?.implementation?.coverage !== undefined && (
+                        <span className={`px-2 py-0.5 rounded text-xs font-medium border ${state.implementation.coverage >= 80
+                          ? 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800'
+                          : state.implementation.coverage >= 50
+                            ? 'text-amber-600 bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800'
+                            : 'text-red-600 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800'
+                          }`}>
+                          {state.implementation.coverage}% coverage
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Spec Progress */}
+                {state?.implementation?.specs && state.implementation.specs.total > 0 && (
+                  <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg border border-border/50">
+                    <span className="text-foreground font-medium text-sm flex items-center gap-2">
+                      <FileText size={16} className="text-muted-foreground" /> Specs
+                    </span>
+                    <span className={`px-2 py-0.5 rounded text-xs font-medium border ${state.implementation.specs.completed === state.implementation.specs.total
+                      ? 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800'
+                      : 'text-blue-600 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800'
+                      }`}>
+                      {state.implementation.specs.completed}/{state.implementation.specs.total} complete
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-6">
+                {!state?.implementation?.scaffolded ? (
+                  <PromptButton
+                    label="Scaffold App"
+                    prompt="Antigravity, scaffold the implementation. Read 'agent-os/commands/scaffold-implementation/scaffold-implementation.md'."
+                    onClick={copyToClipboard}
+                  />
+                ) : (
+                  <div className="p-3 bg-secondary/30 rounded-lg border border-border/50 text-sm text-muted-foreground text-center italic mb-4">
+                    App scaffolded. Ready for implementation.
+                  </div>
+                )}
+
+                {state?.implementation?.scaffolded && state?.design?.exportPrompts?.oneShot && (
+                  <div className="pt-3 border-t border-border/50">
+                    <p className="text-xs text-muted-foreground mb-2 font-medium">Implementation Options:</p>
+                    <div className="space-y-2">
+                      <PromptButton
+                        label="Option A: One-Shot (All)"
+                        prompt={`Antigravity, implement the app. Read 'product-plan/prompts/one-shot-prompt.md'.`}
+                        onClick={copyToClipboard}
+                        small
+                        primary
+                      />
+                      {state?.design?.exportPrompts?.section && (
+                        <div className="relative">
+                          <PromptButton
+                            label="Option B: Incremental (Section)"
+                            prompt={`Antigravity, implement a section. Read 'product-plan/prompts/section-prompt.md'.`}
+                            onClick={copyToClipboard}
+                            small
+                          />
+                          <p className="text-[10px] text-muted-foreground mt-1.5 text-center leading-tight">
+                            Build by spec from <strong>Feature Specs</strong> &larr;
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
 
           </main>
         </div>

@@ -136,6 +136,53 @@ app.get('/api/status', async (req, res) => {
         const hasTokens = fs.existsSync(path.join(designDir, 'product/design-system/colors.json'));
         const hasShell = fs.existsSync(path.join(designDir, 'product/shell/spec.md'));
 
+        // Implementation tracking
+        const appDir = path.join(PROJECT_ROOT, 'app');
+        const hasScaffold = fs.existsSync(path.join(APP_DIR, 'src/lib/utils.ts'));
+
+        // Check for test files
+        const testFiles = glob.sync('**/*.{test,spec}.{ts,tsx,js,jsx}', { cwd: appDir, ignore: ['node_modules/**'] });
+        const hasTests = testFiles.length > 0;
+
+        // Check for coverage report
+        const coverageDir = path.join(PROJECT_ROOT, 'coverage');
+        const coverageSummary = path.join(coverageDir, 'coverage-summary.json');
+        let coveragePercent = null;
+        if (fs.existsSync(coverageSummary)) {
+            try {
+                const coverage = JSON.parse(fs.readFileSync(coverageSummary, 'utf-8'));
+                if (coverage.total && coverage.total.lines) {
+                    coveragePercent = Math.round(coverage.total.lines.pct);
+                }
+            } catch (e) {
+                // Ignore parsing errors
+            }
+        }
+
+        // Check git status
+        let gitInfo = { initialized: false, branch: null, uncommitted: 0, lastCommit: null };
+        const gitDir = path.join(PROJECT_ROOT, '.git');
+        if (fs.existsSync(gitDir)) {
+            gitInfo.initialized = true;
+            try {
+                const { execSync } = require('child_process');
+                gitInfo.branch = execSync('git rev-parse --abbrev-ref HEAD', { cwd: PROJECT_ROOT, encoding: 'utf-8' }).trim();
+                const status = execSync('git status --porcelain', { cwd: PROJECT_ROOT, encoding: 'utf-8' });
+                gitInfo.uncommitted = status.split('\n').filter(l => l.trim()).length;
+                try {
+                    gitInfo.lastCommit = execSync('git log -1 --pretty=format:"%s"', { cwd: PROJECT_ROOT, encoding: 'utf-8' }).trim();
+                } catch (e) {
+                    // No commits yet
+                }
+            } catch (e) {
+                // Git commands failed
+            }
+        }
+
+        // Check for linked specs
+        const specsWithTasks = specs.filter(s => s.tasks.exists && s.tasks.total > 0);
+        const specsCompleted = specs.filter(s => s.tasks.exists && s.tasks.completed === s.tasks.total && s.tasks.total > 0);
+
         res.json({
             product: productFiles,
             services,
@@ -155,7 +202,17 @@ app.get('/api/status', async (req, res) => {
                 }
             },
             implementation: {
-                scaffolded: fs.existsSync(path.join(APP_DIR, 'src/lib/utils.ts'))
+                scaffolded: hasScaffold,
+                tests: {
+                    count: testFiles.length,
+                    hasTests
+                },
+                coverage: coveragePercent,
+                specs: {
+                    total: specsWithTasks.length,
+                    completed: specsCompleted.length
+                },
+                git: gitInfo
             },
             specs,
             projectRoot: PROJECT_ROOT

@@ -159,13 +159,62 @@ async function init() {
 
                 fs.writeFileSync(appPkgPath, JSON.stringify(appPkg, null, 2));
 
+                // 4. Copy root config files
+                console.log(cyan('\n4. Setting up quality tooling...'));
 
-                console.log(green(`\n\nAgent OS Workspace created successfully! 🚀\n`));
-                console.log(`Next steps:\n`);
+                const rootConfigFiles = [
+                    '.gitignore',
+                    '.prettierrc',
+                    '.env.example',
+                    'eslint.config.js',
+                    'commitlint.config.js',
+                    'lint-staged.config.js',
+                    'vitest.config.ts',
+                    'README.md'
+                ];
+
+                for (const file of rootConfigFiles) {
+                    const src = path.join(templateDir, file);
+                    if (fs.existsSync(src)) {
+                        fs.copyFileSync(src, path.join(root, file));
+                    }
+                }
+
+                // Copy directories
+                const rootDirs = ['.github', '.husky', '.vscode', 'src/__tests__'];
+                for (const dir of rootDirs) {
+                    const src = path.join(templateDir, dir);
+                    if (fs.existsSync(src)) {
+                        fs.cpSync(src, path.join(root, dir), copyOptions);
+                    }
+                }
+
+                // 5. Initialize git repository
+                console.log(cyan('\n5. Initializing git repository...'));
+                try {
+                    const { execSync } = await import('node:child_process');
+                    execSync('git init', { cwd: root, stdio: 'inherit' });
+                    execSync('git add .', { cwd: root, stdio: 'ignore' });
+                } catch (e) {
+                    console.log('  (Git initialization skipped - git may not be available)');
+                }
+
+                console.log(green(`\n\n✅ Agent OS Workspace created successfully! 🚀\n`));
+                console.log(bold('What\'s included:'));
+                console.log('  ✓ ESLint + Prettier + Husky pre-commit hooks');
+                console.log('  ✓ Vitest for testing');
+                console.log('  ✓ GitHub Actions CI workflow');
+                console.log('  ✓ Impeccable design commands');
+                console.log('  ✓ AI Slop Guard hook');
+                console.log(`\n${bold('Next steps:')}\n`);
                 console.log(`  cd ${result.projectName}`);
                 console.log(`  npm install`);
                 console.log(`  npm run dev\n`);
-                console.log(`This will start the App, Control Center, and Design OS concurrently.`);
+                console.log(`${bold('Recommended workflow:')}`);
+                console.log(`  1. /plan-product     — Define your product`);
+                console.log(`  2. /create-constitution — Set project principles`);
+                console.log(`  3. /research-tech    — Research your stack`);
+                console.log(`  4. /design-tokens    — Start designing`);
             });
         });
 

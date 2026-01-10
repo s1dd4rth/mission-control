@@ -11,7 +11,8 @@ Create the technical specification (`spec.md`) for a specific product section.
 
 ### Step 1: Analyze Context
 - Read `design-system/product/product-roadmap.md` to understand where this section fits.
-- Read `design-system/product/product-overview.md` to understand the overall product context.
+- Read `design-system/product/product-overview.md` to understand the data model and core flows.
+- Read `design-system/design-tokens.md` and `design-system/app-shell.md` to understand the design language and layout constraints.
 
 ### Step 2: Create Spec File
 Create `design-system/product/sections/[section-id]/spec.md`.
