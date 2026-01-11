@@ -67,13 +67,14 @@ async function init() {
 
             // Use npm create vite to scaffold the app inside the 'app' folder
             // Pin version to avoid experimental prompts
-            const cmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
+            // Use npm create vite to scaffold the app inside the 'app' folder
+            // Pin version to avoid experimental prompts
+            const isWin = process.platform === 'win32';
+            const cmd = isWin ? 'npx.cmd' : 'npx'; // explicitly use .cmd on windows for clarity, though shell:true might find it
             const viteProcess = spawn(cmd, ['-y', 'create-vite@5.2.0', 'app', '--template', 'react-ts'], {
                 stdio: 'inherit',
-                shell: false, // Don't use shell, it messes up CWD in some environments
-                cwd: root, // Explicitly set CWD for the child process
-                // env: { ...process.env, PWD: root } // Maybe strictly needed? Let's check without first or keep it?
-                // Keeping env PWD just in case npx looks at it
+                shell: isWin, // Windows needs shell:true for .cmd execution
+                cwd: root,
                 env: { ...process.env, PWD: root }
             });
 
