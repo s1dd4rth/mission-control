@@ -67,7 +67,8 @@ async function init() {
 
             // Use npm create vite to scaffold the app inside the 'app' folder
             // Pin version to avoid experimental prompts
-            const viteProcess = spawn('npx', ['-y', 'create-vite@5.2.0', 'app', '--template', 'react-ts'], {
+            const cmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
+            const viteProcess = spawn(cmd, ['-y', 'create-vite@5.2.0', 'app', '--template', 'react-ts'], {
                 stdio: 'inherit',
                 shell: false, // Don't use shell, it messes up CWD in some environments
                 cwd: root, // Explicitly set CWD for the child process
