@@ -3,6 +3,7 @@
 ## 🛡️ Hooks & Standards
 - **Pre-Check**: Read `design-system/.gemini/hooks/ai-slop-guard.md`. Avoid all listed "slop" patterns.
 - **Post-Check**: Read `design-system/.gemini/hooks/on-design-complete.md`. Perform the required audit for this phase.
+- **Skill**: Read `design-system/.gemini/skills/frontend-design/SKILL.md`. Apply these aesthetic principles to every decision.
 
 ## Goal
 Implement a React component for a specific screen design within a section.
