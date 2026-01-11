@@ -14,12 +14,12 @@
 Scaffold a new project immediately:
 
 ```bash
-npm create @builderos/agent-os@latest my-app
+npm create @theproductguy/mission-control@latest my-app
 ```
 
 ## Packages
 
-- **[@builderos/create-agent-os](packages/create-agent-os)**: The CLI and Mission Control dashboard.
+- **[@theproductguy/create-mission-control](packages/create-agent-os)**: The CLI and Control Center dashboard.
 
 ## License
 

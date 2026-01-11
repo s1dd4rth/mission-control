@@ -1,4 +1,4 @@
-# @builderos/create-agent-os
+# @theproductguy/create-mission-control
 
 The official scaffolding tool for **Agent OS** applications.
 
