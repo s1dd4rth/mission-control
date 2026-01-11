@@ -46,9 +46,14 @@ function App() {
     localStorage.setItem('ide_scheme', scheme);
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast({ title: "Prompt Copied!", type: "success" });
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast({ title: "Prompt Copied!", type: "success" });
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      toast({ title: "Failed to copy", description: "Please copy manually", type: "error" });
+    }
   };
 
   if (loading) return <div className="min-h-screen bg-background text-foreground flex items-center justify-center">Loading Control Center...</div>;

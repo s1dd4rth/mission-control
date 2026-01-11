@@ -19,11 +19,16 @@ export const CreateSpecModal = ({ runtimeConfig, onClose, onSuccess, openFile }:
             if (runtimeConfig?.api) {
                 await axios.post(`${runtimeConfig.api}/api/scaffold/spec`, { name });
                 const prompt = `Antigravity, let's shape the spec for '${name}'. Read commands/shape-spec/shape-spec.md.`;
-                navigator.clipboard.writeText(prompt);
+                try {
+                    await navigator.clipboard.writeText(prompt);
+                    toast({ title: "Spec created & Prompt copied!", type: 'success' });
+                } catch (err) {
+                    console.error('Failed to copy', err);
+                    toast({ title: "Spec created", description: "Standard prompt failed to copy", type: 'warning' });
+                }
                 setNewSpecName("");
                 onSuccess();
                 openFile(`specs/${name}/spec.md`, `${name} Spec`);
-                toast({ title: "Spec created & Prompt copied!", type: 'success' });
                 onClose();
             }
         }

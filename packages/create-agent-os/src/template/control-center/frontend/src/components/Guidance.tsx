@@ -30,9 +30,15 @@ export const Guidance = ({ phase, title, description, prompt, actionLabel, onAct
                     <div className="flex items-center gap-3 shrink-0">
                         {prompt && (
                             <button
-                                onClick={() => {
-                                    navigator.clipboard.writeText(prompt);
-                                    toast({ title: "Prompt Copied!", type: 'success' });
+                                onClick={async () => {
+                                    if (!prompt) return;
+                                    try {
+                                        await navigator.clipboard.writeText(prompt);
+                                        toast({ title: "Prompt Copied!", type: 'success' });
+                                    } catch (err) {
+                                        console.error('Failed to copy', err);
+                                        toast({ title: "Failed to copy", description: "Please copy manually", type: 'error' });
+                                    }
                                 }}
                                 className="flex items-center gap-2 px-4 py-2.5 bg-secondary hover:bg-secondary/80 text-secondary-foreground font-medium rounded-lg border border-border transition-all shadow-sm hover:shadow"
                             >
