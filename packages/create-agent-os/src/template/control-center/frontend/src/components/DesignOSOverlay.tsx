@@ -30,7 +30,7 @@ export const DesignOSOverlay = ({ onClose }: DesignOSOverlayProps) => {
                     src={`http://localhost:5400?theme=${localStorage.getItem('theme') || 'system'}`}
                     className="absolute inset-0 w-full h-full border-none"
                     title="Design OS"
-                    allow="clipboard-read; clipboard-write text/html" // updated per chrome warnings usually
+                    allow="clipboard-read; clipboard-write"
                 />
             </div>
         </div >

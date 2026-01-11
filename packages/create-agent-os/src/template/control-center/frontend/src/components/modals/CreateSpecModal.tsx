@@ -17,19 +17,24 @@ export const CreateSpecModal = ({ runtimeConfig, onClose, onSuccess, openFile }:
         if (newSpecName.trim()) {
             const name = newSpecName.trim();
             if (runtimeConfig?.api) {
-                await axios.post(`${runtimeConfig.api}/api/scaffold/spec`, { name });
-                const prompt = `Antigravity, let's shape the spec for '${name}'. Read commands/shape-spec/shape-spec.md.`;
                 try {
-                    await navigator.clipboard.writeText(prompt);
-                    toast({ title: "Spec created & Prompt copied!", type: 'success' });
+                    await axios.post(`${runtimeConfig.api}/api/scaffold/spec`, { name });
+                    const prompt = `Antigravity, let's shape the spec for '${name}'. Read commands/shape-spec/shape-spec.md.`;
+                    try {
+                        await navigator.clipboard.writeText(prompt);
+                        toast({ title: "Spec created & Prompt copied!", type: 'success' });
+                    } catch (err) {
+                        console.error('Failed to copy', err);
+                        toast({ title: "Spec created", description: "Standard prompt failed to copy", type: 'warning' });
+                    }
+                    setNewSpecName("");
+                    onSuccess();
+                    openFile(`specs/${name}/spec.md`, `${name} Spec`);
+                    onClose();
                 } catch (err) {
-                    console.error('Failed to copy', err);
-                    toast({ title: "Spec created", description: "Standard prompt failed to copy", type: 'warning' });
+                    console.error('Failed to create spec', err);
+                    toast({ title: "Failed to create spec", description: "Check backend connection", type: 'error' });
                 }
-                setNewSpecName("");
-                onSuccess();
-                openFile(`specs/${name}/spec.md`, `${name} Spec`);
-                onClose();
             }
         }
     };
