@@ -1,5 +1,9 @@
 # COMMAND: Design Screen Component
 
+## 🛡️ Hooks & Standards
+- **Pre-Check**: Read `design-system/.gemini/hooks/ai-slop-guard.md`. Avoid all listed "slop" patterns.
+- **Post-Check**: Read `design-system/.gemini/hooks/on-design-complete.md`. Perform the required audit for this phase.
+
 ## Goal
 Implement a React component for a specific screen design within a section.
 

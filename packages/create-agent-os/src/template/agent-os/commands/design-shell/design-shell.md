@@ -1,5 +1,9 @@
 # COMMAND: Generate App Shell
 
+## 🛡️ Hooks & Standards
+- **Pre-Check**: Read `design-system/.gemini/hooks/ai-slop-guard.md`. Avoid all listed "slop" patterns.
+- **Post-Check**: Read `design-system/.gemini/hooks/on-design-complete.md`. Perform the required audit for this phase.
+
 ## Goal
 Design the application shell (navigation, layout) for the product.
 
