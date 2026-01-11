@@ -940,7 +940,7 @@ function App() {
                     <div className="space-y-2">
                       <PromptButton
                         label="Option A: One-Shot (All)"
-                        prompt={`Antigravity, implement the app. Read 'product-plan/prompts/one-shot-prompt.md'.`}
+                        prompt={`Antigravity, implement the app. Read 'product-plan/prompts/one-shot-prompt.md'. If Context7 is configured, use it to verify library documentation.`}
                         onClick={copyToClipboard}
                         small
                         primary
@@ -949,7 +949,7 @@ function App() {
                         <div className="relative">
                           <PromptButton
                             label="Option B: Incremental (Section)"
-                            prompt={`Antigravity, implement a section. Read 'product-plan/prompts/section-prompt.md'.`}
+                            prompt={`Antigravity, implement a section. Read 'product-plan/prompts/section-prompt.md'. Use Context7 for latest docs if available.`}
                             onClick={copyToClipboard}
                             small
                           />

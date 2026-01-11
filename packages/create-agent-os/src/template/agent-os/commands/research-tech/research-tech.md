@@ -13,7 +13,15 @@ Research and document best practices, current versions, and known gotchas for th
 ### Step 1: Read Tech Stack
 Read `agent-os/product/tech-stack.md` to understand the chosen technologies.
 
-### Step 2: Research Each Technology
+### Step 2: Analyze Technologies
+For each tech choice, answer:
+- **Why this choice?** (Pros/Cons)
+- **Latest Version?** (Use Context7 to check latest docs/features if possible)
+- **Alternatives considered?**
+
+> **Tip:** If you have Context7 configured, use it to fetch the latest documentation for accurate analysis.
+> Prompt: "Using Context7, what are the latest best practices for [Technology]?"
+
 For each major technology in the stack, research:
 
 1. **Current stable version** — What version should we pin to?
