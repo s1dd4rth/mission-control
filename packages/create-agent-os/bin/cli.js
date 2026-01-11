@@ -121,7 +121,7 @@ async function init() {
 
                 appPkg.dependencies = {
                     ...appPkg.dependencies,
-                    "@theproductguy/agent-os-ui": "*", // Use workspace version
+                    "@theproductguy/agent-os-ui": "file:../agent-os-ui", // Force local resolution
                     "lucide-react": "^0.469.0",
                     "clsx": "^2.1.0",
                     "tailwind-merge": "^2.2.0",
