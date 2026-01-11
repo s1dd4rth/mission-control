@@ -105,8 +105,10 @@ async function init() {
                 fs.cpSync(path.join(templateDir, 'agent-os'), path.join(root, 'agent-os'), copyOptions);
 
                 // Copy Agent OS UI Package (for local workspace support)
-                fs.cpSync(path.join(templateDir, 'agent-os-ui'), path.join(root, 'agent-os-ui'), copyOptions);
-                fs.renameSync(path.join(root, 'agent-os-ui', '_package.json'), path.join(root, 'agent-os-ui', 'package.json'));
+                const uiSrc = path.join(templateDir, 'agent-os-ui');
+                // console.log('[DEBUG] Agent OS UI Src Files:', fs.readdirSync(uiSrc)); // Debugging missing file
+                fs.cpSync(uiSrc, path.join(root, 'agent-os-ui'), copyOptions);
+                fs.renameSync(path.join(root, 'agent-os-ui', 'package.json.manifest'), path.join(root, 'agent-os-ui', 'package.json'));
 
                 // 3. Configure Workspace
                 console.log(cyan('\n3. Configuring Workspace...'));
