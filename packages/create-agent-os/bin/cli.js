@@ -91,8 +91,8 @@ async function init() {
                 // Copy Control Center
                 // Copy helper to exclude node_modules
                 const copyOptions = {
-                    recursive: true,
-                    filter: (src) => !src.includes('node_modules')
+                    recursive: true
+                    // filter: (src) => !src.includes('node_modules') // ERROR: This filters out everything if CLI is installed in node_modules!
                 };
 
                 // Copy Control Center
