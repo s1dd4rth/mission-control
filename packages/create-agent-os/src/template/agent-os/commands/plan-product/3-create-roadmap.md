@@ -2,7 +2,8 @@ Now that you've created this product's mission.md, use that to guide your creati
 
 Generate `agent-os/product/roadmap.md` with an ordered feature checklist:
 
-Do not include any tasks for initializing a new codebase or bootstrapping a new application. Assume the user is already inside the project's codebase and has a bare-bones application initialized.
+Do not include any tasks for initializing a new codebase. Assume the user is inside the project.
+HOWEVER: You MUST include "Phase 0: Design System Integration" as the first set of tasks, exactly as shown in the structure below. This is mandatory for all products built with Agent OS.
 
 #### Creating the Roadmap:
 
@@ -21,14 +22,17 @@ Do not include any tasks for initializing a new codebase or bootstrapping a new 
 ```markdown
 # Product Roadmap
 
-1. [ ] [FEATURE_NAME] — [1-2 SENTENCE DESCRIPTION OF COMPLETE, TESTABLE FEATURE] `[EFFORT]`
+1. [ ] **Phase 0: Design System Integration**
+   - [ ] Initialize Design System (Run `/initialize-design`)
+   - [ ] Define Design Tokens (Run `/design-tokens`)
+   - [ ] Build UI Shell (Run `/design-shell`)
+
 2. [ ] [FEATURE_NAME] — [1-2 SENTENCE DESCRIPTION OF COMPLETE, TESTABLE FEATURE] `[EFFORT]`
 3. [ ] [FEATURE_NAME] — [1-2 SENTENCE DESCRIPTION OF COMPLETE, TESTABLE FEATURE] `[EFFORT]`
 4. [ ] [FEATURE_NAME] — [1-2 SENTENCE DESCRIPTION OF COMPLETE, TESTABLE FEATURE] `[EFFORT]`
 5. [ ] [FEATURE_NAME] — [1-2 SENTENCE DESCRIPTION OF COMPLETE, TESTABLE FEATURE] `[EFFORT]`
 6. [ ] [FEATURE_NAME] — [1-2 SENTENCE DESCRIPTION OF COMPLETE, TESTABLE FEATURE] `[EFFORT]`
 7. [ ] [FEATURE_NAME] — [1-2 SENTENCE DESCRIPTION OF COMPLETE, TESTABLE FEATURE] `[EFFORT]`
-8. [ ] [FEATURE_NAME] — [1-2 SENTENCE DESCRIPTION OF COMPLETE, TESTABLE FEATURE] `[EFFORT]`
 
 > Notes
 > - Order items by technical dependencies and product architecture
