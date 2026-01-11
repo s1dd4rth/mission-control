@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Layout, Layers, FileText, Code, CheckSquare, RefreshCw, ArrowRight, X, Plus, Trash2, WalletCards, LayoutDashboard, Copy, Package } from 'lucide-react';
+import { Layout, Layers, FileText, Code, CheckSquare, RefreshCw, ArrowRight, X, Plus, Trash2, WalletCards, LayoutDashboard, Copy, Package, Play } from 'lucide-react';
 import { useToast } from './components/ui/ToastContext';
 import { ThemeToggle } from '@theproductguy/agent-os-ui';
 import '@theproductguy/agent-os-ui/style.css';
@@ -145,19 +145,33 @@ function StatusItem({ label, status, icon, small, onClick }: any) {
 }
 
 function PromptButton({ label, prompt, onClick, small, primary }: any) {
+  const deepLink = `vscode://vscode.executeCommand/workbench.action.chat.open?query=${encodeURIComponent(prompt)}`;
+
   return (
-    <button
-      onClick={() => onClick(prompt)}
-      className={`flex items-center justify-center gap-2 rounded-lg font-medium transition cursor-pointer
-            ${small ? 'px-3 py-1.5 text-xs flex-1' : 'px-4 py-2 text-sm w-full'}
-            ${primary
-          ? 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm'
-          : 'bg-background hover:bg-secondary border border-border text-foreground hover:text-foreground'}
-          `}
-    >
-      <Copy size={small ? 12 : 14} />
-      {label}
-    </button>
+    <div className={`flex gap-1 items-center ${!small ? 'w-full' : 'flex-1'}`}>
+      <button
+        onClick={() => onClick(prompt)}
+        className={`flex items-center justify-center gap-2 rounded-lg font-medium transition cursor-pointer flex-1
+              ${small ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'}
+              ${primary
+            ? 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm'
+            : 'bg-background hover:bg-secondary border border-border text-foreground hover:text-foreground'}
+            `}
+      >
+        <Copy size={small ? 12 : 14} />
+        {label}
+      </button>
+
+      <a
+        href={deepLink}
+        className={`flex items-center justify-center rounded-lg border border-border bg-secondary hover:bg-secondary/80 text-foreground transition
+          ${small ? 'w-8 h-[30px]' : 'w-10 h-[38px]'}
+        `}
+        title="Run in IDE (Deep Link)"
+      >
+        <Play size={small ? 12 : 14} fill="currentColor" className="opacity-70" />
+      </a>
+    </div>
   )
 }
 
