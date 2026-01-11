@@ -106,6 +106,7 @@ async function init() {
 
                 // Copy Agent OS UI Package (for local workspace support)
                 fs.cpSync(path.join(templateDir, 'agent-os-ui'), path.join(root, 'agent-os-ui'), copyOptions);
+                fs.renameSync(path.join(root, 'agent-os-ui', '_package.json'), path.join(root, 'agent-os-ui', 'package.json'));
 
                 // 3. Configure Workspace
                 console.log(cyan('\n3. Configuring Workspace...'));
