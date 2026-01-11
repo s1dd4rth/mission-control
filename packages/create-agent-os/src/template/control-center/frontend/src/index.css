@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,6 +7,7 @@
 /*
   Control Center Theme (Aligned with Design OS)
   Warm Neutrals / Stone Palette
+  Font: Outfit (Modern, Premium)
 */
 
 
@@ -50,6 +52,18 @@
     /* stone-500 */
     --chart-1: oklch(0.532 0.157 131.589);
     /* lime-600 */
+    --success: oklch(0.627 0.194 149.214);
+    /* emerald-500 */
+    --success-foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --warning: oklch(0.704 0.191 47.567);
+    /* amber-500 */
+    --warning-foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
+    --info: oklch(0.612 0.203 252.339);
+    /* blue-500 */
+    --info-foreground: oklch(0.985 0.001 106.424);
+    /* stone-50 */
     /* Sidebar */
     --sidebar: oklch(0.985 0.001 106.424);
     /* stone-50 */
@@ -109,6 +123,18 @@
     /* stone-500 */
     --chart-1: oklch(0.648 0.2 131.684);
     /* lime-500 */
+    --success: oklch(0.627 0.194 149.214);
+    /* emerald-500 */
+    --success-foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --warning: oklch(0.704 0.191 47.567);
+    /* amber-500 */
+    --warning-foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
+    --info: oklch(0.612 0.203 252.339);
+    /* blue-500 */
+    --info-foreground: oklch(0.216 0.006 56.043);
+    /* stone-900 */
     /* Sidebar */
     --sidebar: oklch(0.268 0.007 34.298);
     /* stone-800 */

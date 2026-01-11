@@ -9,9 +9,9 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                display: ["DM Sans", "system-ui", "sans-serif"],
-                body: ["DM Sans", "system-ui", "sans-serif"],
-                sans: ["DM Sans", "system-ui", "sans-serif"],
+                display: ["Outfit", "system-ui", "sans-serif"],
+                body: ["Outfit", "system-ui", "sans-serif"],
+                sans: ["Outfit", "system-ui", "sans-serif"],
                 mono: ["IBM Plex Mono", "ui-monospace", "monospace"]
             },
             borderRadius: {
@@ -50,6 +50,18 @@ export default {
                 destructive: {
                     DEFAULT: 'var(--destructive)',
                     foreground: 'var(--destructive-foreground)'
+                },
+                success: {
+                    DEFAULT: 'var(--success)',
+                    foreground: 'var(--success-foreground)'
+                },
+                warning: {
+                    DEFAULT: 'var(--warning)',
+                    foreground: 'var(--warning-foreground)'
+                },
+                info: {
+                    DEFAULT: 'var(--info)',
+                    foreground: 'var(--info-foreground)'
                 },
                 border: 'var(--border)',
                 input: 'var(--input)',

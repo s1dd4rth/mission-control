@@ -52,6 +52,9 @@ function slugify(str: string): string {
 export function parseProductOverview(md: string): ProductOverview | null {
   if (!md || !md.trim()) return null
 
+  // Normalize line endings for Windows compatibility
+  md = md.replace(/\r\n/g, '\n')
+
   try {
     // Extract product name from first # heading
     const nameMatch = md.match(/^#\s+(.+)$/m)
@@ -116,6 +119,9 @@ export function parseProductOverview(md: string): ProductOverview | null {
  */
 export function parseProductRoadmap(md: string): ProductRoadmap | null {
   if (!md || !md.trim()) return null
+
+  // Normalize line endings for Windows compatibility
+  md = md.replace(/\r\n/g, '\n')
 
   try {
     const sections: Section[] = []
