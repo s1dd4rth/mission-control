@@ -37,7 +37,7 @@ const parseStatus = (relativePath) => {
     // Find next incomplete item and all items
     let nextItem = null;
     const items = [];
-    const lines = content.split('\n');
+    const lines = content.split(/\r?\n/);
 
     for (const line of lines) {
         const match = line.match(/^\s*-\s*\[([ x])\]\s*(.+)$/);
