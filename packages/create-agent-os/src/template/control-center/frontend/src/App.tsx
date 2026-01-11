@@ -2,6 +2,7 @@ import { useEffect, useState, createContext, useContext } from 'react';
 import axios from 'axios';
 import { Layout, Layers, FileText, Code, CheckSquare, RefreshCw, ArrowRight, X, Plus, Trash2, WalletCards, LayoutDashboard, Copy, Package, Play, Settings } from 'lucide-react';
 import { useToast } from './components/ui/ToastContext';
+// @ts-ignore
 import { ThemeToggle } from '@theproductguy/agent-os-ui';
 import '@theproductguy/agent-os-ui/style.css';
 import ReactMarkdown from 'react-markdown';
@@ -115,7 +116,7 @@ const Guidance = ({ phase, title, description, prompt, actionLabel, onAction, cl
   </div>
 );
 
-const IdeContext = createContext({ scheme: 'vscode', setScheme: (s: string) => { } });
+const IdeContext = createContext({ scheme: 'vscode', setScheme: (_s: string) => { } });
 
 function StatusItem({ label, status, icon, small, onClick }: any) {
   if (!status) return null;
